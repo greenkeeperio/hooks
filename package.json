@@ -10,7 +10,7 @@
     "hapi": "^16.0.0",
     "hot-shots": "^4.3.0",
     "lodash": "^4.16.2",
-    "rollbar": "^0.6.2"
+    "rollbar": "^2.0.1"
   },
   "devDependencies": {
     "nyc": "^10.0.0",
