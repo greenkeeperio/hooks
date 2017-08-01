@@ -86,7 +86,7 @@ const register = require('../lib/reset-event')
     t.true(JSON.parse(payload).ok, 'payload')
     const job = await channel.get(env.QUEUE_NAME)
     t.same(JSON.parse(job.content.toString()), {
-      name: 'reset-event',
+      name: 'reset',
       repositoryFullName: 'finnp/abc'
     })
     t.same(job.properties.priority, 5, 'job priority')
