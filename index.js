@@ -47,6 +47,12 @@ require('./lib/rollbar')
       channel
     }
   }, {
+    register: require('./lib/reset-event'),
+    options: {
+      env,
+      channel
+    }
+  }, {
     register: require('good'),
     options: {
       reporters: {
