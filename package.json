@@ -14,13 +14,12 @@
     "rollbar": "^2.0.1"
   },
   "devDependencies": {
-    "nyc": "^11.0.1",
     "standard": "^10.0.0",
     "tap": "^10.0.0"
   },
   "engines": {
-    "node": "7"
-  },
+     "node": ">=8"
+   },
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "restricted"
@@ -34,6 +33,6 @@
     "deploy": "./deploy",
     "pretest": "standard && npm run mq:start",
     "start": "node --harmony_async_await index.js",
-    "test": "nyc tap --node-arg=--harmony_async_await --no-cov ./test"
+    "test": "tap ./test"
   }
 }
