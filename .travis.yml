@@ -7,9 +7,14 @@ cache:
 notifications:
   email: false
 node_js:
-  - '7'
+  - '8'
+before_install:
+- npm install -g greenkeeper-lockfile@1
 before_script:
-  - npm prune
+- greenkeeper-lockfile-update
+- npm prune
+after_script:
+- greenkeeper-lockfile-upload
 after_success:
 - ./deploy
 branches:
