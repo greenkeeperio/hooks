@@ -96,6 +96,7 @@ const register = require('../lib/npm-event')
   })
 
   tap.test('accepts packages that are bigger then 1MB', async (t) => {
+    const bigBody = Buffer.alloc(1024 * 1024 * 5).toString()
     const reqPayload = JSON.stringify({payload: {
       name: '@test/test',
       'dist-tags': {
@@ -103,7 +104,8 @@ const register = require('../lib/npm-event')
       },
       versions: {
         '1.0.0': {}
-      }
+      },
+      body: bigBody
     }})
 
     server.register({
@@ -127,7 +129,6 @@ const register = require('../lib/npm-event')
         'x-npm-signature': `sha256=${hmacPayload}`,
         'Content-Type': 'application/json',
         'Content-Length': 5 * 1024 * 1024 // 5 MB
-
       },
       payload: reqPayload
     })
