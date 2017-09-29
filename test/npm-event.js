@@ -126,7 +126,7 @@ const register = require('../lib/npm-event')
       headers: {
         'x-npm-signature': `sha256=${hmacPayload}`,
         'Content-Type': 'application/json',
-        'Content-Length': 20000000
+        'Content-Length': 5 * 1024 * 1024 // 5 MB
 
       },
       payload: reqPayload
