@@ -94,4 +94,45 @@ const register = require('../lib/npm-event')
     t.same(job.properties.priority, 1, 'job priority')
     t.end()
   })
+
+  tap.test('accepts packages that are bigger then 1MB', async (t) => {
+    const reqPayload = JSON.stringify({payload: {
+      name: '@test/test',
+      'dist-tags': {
+        latest: '1.0.0'
+      },
+      versions: {
+        '1.0.0': {}
+      }
+    }})
+
+    server.register({
+      register,
+      options: {env, channel}
+    })
+
+    const installation = '123'
+    const secret = crypto.createHmac('sha256', env.NPMHOOKS_SECRET)
+    .update(installation)
+    .digest('hex')
+
+    const hmacPayload = crypto.createHmac('sha256', secret)
+    .update(reqPayload)
+    .digest('hex')
+
+    const {statusCode} = await server.inject({
+      method: 'POST',
+      url: `/npm/${installation}`,
+      headers: {
+        'x-npm-signature': `sha256=${hmacPayload}`,
+        'Content-Type': 'application/json',
+        'Content-Length': 20000000
+
+      },
+      payload: reqPayload
+    })
+
+    t.is(statusCode, 202, 'statusCode')
+    t.end()
+  })
 })()
