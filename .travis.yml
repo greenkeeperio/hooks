@@ -11,6 +11,7 @@ node_js:
 before_install:
 - npm install -g greenkeeper-lockfile@1
 before_script:
+- npm install -g npm@5.2.0
 - greenkeeper-lockfile-update
 - npm prune
 after_script:
