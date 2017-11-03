@@ -3,7 +3,7 @@
   "version": "0.0.0-placeholder",
   "dependencies": {
     "amqplib": "^0.5.0",
-    "boom": "^5.2.0",
+    "boom": "^7.0.0",
     "envalid": "^3.0.0",
     "good": "^7.0.2",
     "good-console": "^6.3.1",
