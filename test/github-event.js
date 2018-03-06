@@ -71,8 +71,8 @@ const register = require('../lib/github-event')
     })
 
     const hmacPayload = crypto.createHmac('sha1', env.WEBHOOKS_SECRET)
-    .update(reqPayload)
-    .digest('hex')
+      .update(reqPayload)
+      .digest('hex')
 
     const {statusCode, payload} = await server.inject({
       method: 'POST',
@@ -111,8 +111,8 @@ const register = require('../lib/github-event')
     })
 
     const hmacPayload = crypto.createHmac('sha1', env.WEBHOOKS_SECRET)
-    .update(reqPayload)
-    .digest('hex')
+      .update(reqPayload)
+      .digest('hex')
 
     const {statusCode, payload} = await server.inject({
       method: 'POST',
@@ -151,8 +151,8 @@ const register = require('../lib/github-event')
     })
 
     const hmacPayload = crypto.createHmac('sha1', env.WEBHOOKS_SECRET)
-    .update(reqPayload)
-    .digest('hex')
+      .update(reqPayload)
+      .digest('hex')
 
     const {statusCode, payload} = await server.inject({
       method: 'POST',

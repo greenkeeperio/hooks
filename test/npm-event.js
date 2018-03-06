@@ -62,12 +62,12 @@ const register = require('../lib/npm-event')
 
     const installation = '123'
     const secret = crypto.createHmac('sha256', env.NPMHOOKS_SECRET)
-    .update(installation)
-    .digest('hex')
+      .update(installation)
+      .digest('hex')
 
     const hmacPayload = crypto.createHmac('sha256', secret)
-    .update(reqPayload)
-    .digest('hex')
+      .update(reqPayload)
+      .digest('hex')
 
     const {statusCode, payload} = await server.inject({
       method: 'POST',
@@ -113,12 +113,12 @@ const register = require('../lib/npm-event')
 
     const installation = '123'
     const secret = crypto.createHmac('sha256', env.NPMHOOKS_SECRET)
-    .update(installation)
-    .digest('hex')
+      .update(installation)
+      .digest('hex')
 
     const hmacPayload = crypto.createHmac('sha256', secret)
-    .update(reqPayload)
-    .digest('hex')
+      .update(reqPayload)
+      .digest('hex')
 
     const {statusCode} = await server.inject({
       method: 'POST',
@@ -154,12 +154,12 @@ const register = require('../lib/npm-event')
 
     const installation = '123'
     const secret = crypto.createHmac('sha256', env.NPMHOOKS_SECRET)
-    .update(installation)
-    .digest('hex')
+      .update(installation)
+      .digest('hex')
 
     const hmacPayload = crypto.createHmac('sha256', secret)
-    .update(reqPayload)
-    .digest('hex')
+      .update(reqPayload)
+      .digest('hex')
 
     const {statusCode} = await server.inject({
       method: 'POST',
