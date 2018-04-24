@@ -53,6 +53,12 @@ require('./lib/rollbar')
       channel
     }
   }, {
+    register: require('./lib/update-node-event'),
+    options: {
+      env,
+      channel
+    }
+  }, {
     register: require('good'),
     options: {
       reporters: {
