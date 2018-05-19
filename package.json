@@ -9,6 +9,7 @@
     "good-console": "^7.0.0",
     "good-squeeze": "^5.0.0",
     "hapi": "^16.6.3",
+    "hoek": "^4.2.1",
     "hot-shots": "^5.2.0",
     "lodash": "^4.16.2",
     "rollbar": "^2.0.1"
