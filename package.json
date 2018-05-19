@@ -11,8 +11,8 @@
     "hapi": "^16.6.3",
     "hoek": "^4.2.1",
     "hot-shots": "^5.2.0",
-    "lodash": "^4.16.2",
-    "rollbar": "^2.0.1"
+    "lodash": "^4.17.10",
+    "rollbar": "^2.4.0"
   },
   "devDependencies": {
     "standard": "^11.0.0",
