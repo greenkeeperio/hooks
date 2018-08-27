@@ -106,5 +106,5 @@ require('./lib/rollbar')
   })
 
   await server.start()
-  console.log('server running')
+  console.log('server running', server.info.uri)
 })()
