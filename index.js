@@ -11,7 +11,12 @@ require('./lib/rollbar')
     prefix: 'hooks.',
     globalTags: [env.NODE_ENV]
   })
-  const server = new hapi.Server()
+  const server = new hapi.Server({
+    debug: {
+      log: ['error', 'requested'],
+      request: ['error', 'requested', 'request']
+    }
+  })
   const conn = await amqp.connect(env.AMQP_URL)
   const channel = await conn.createChannel()
   await channel.assertQueue(env.QUEUE_NAME, {
@@ -84,6 +89,16 @@ require('./lib/rollbar')
       }
     }
   }])
+
+  if (env.IS_ENTERPRISE) {
+    await server.register({
+      register: require('./lib/nexus-event'),
+      options: {
+        env,
+        channel
+      }
+    })
+  }
 
   server.on('response', (request, reply) => {
     statsdClient.increment(`status_code.${request.response.statusCode}`)
