@@ -90,7 +90,7 @@ require('./lib/rollbar')
     }
   }])
 
-  if (env.IS_ENTERPRISE) {
+  if (env.IS_ENTERPRISE && env.NEXUS_SECRET && env.NEXUS_URL && env.NEXUS_REPOSITORY && env.NEXUS_INSTALLATION) {
     await server.register({
       register: require('./lib/nexus-event'),
       options: {
