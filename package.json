@@ -12,7 +12,7 @@
     "hoek": "^4.2.1",
     "hot-shots": "^5.2.0",
     "lodash": "^4.17.10",
-    "rollbar": "^2.4.0"
+    "rollbar": "^2.5.0"
   },
   "devDependencies": {
     "nock": "^10.0.1",
