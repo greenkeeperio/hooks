@@ -58,6 +58,12 @@ require('./lib/rollbar')
       channel
     }
   }, {
+    register: require('./lib/sync-event'),
+    options: {
+      env,
+      channel
+    }
+  }, {
     register: require('./lib/update-node-event'),
     options: {
       env,
