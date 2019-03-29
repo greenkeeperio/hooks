@@ -131,20 +131,20 @@ const register = require('../lib/npm-event')
       payload: reqPayload
     })
     t.true((payloadSize > 1024 * 1024 * 1), 'payload is bigger then 1MB')
-    t.true((payloadSize < 1024 * 1024 * 25), 'payload is smaller then 25MB')
+    t.true((payloadSize < 1024 * 1024 * 100), 'payload is smaller then 100MB')
     t.is(statusCode, 202, 'statusCode')
     t.end()
   })
 
   tap.test('does not accept packages that are bigger then 25MB', async (t) => {
-    const bigBody = Buffer.alloc(1024 * 1024 * 5).toString()
+    const bigBody = Buffer.alloc(1024 * 1024 * 5 * 4).toString()
     const reqPayload = JSON.stringify({
       payload: {
         body: bigBody
       }
     })
     // Because of the JSON.stringify() the payload with the 5MB Buffer actually
-    // has a size of ~30MB
+    // has a size of ~30MB * 4 ~= 120MB
     const payloadSize = reqPayload.length
 
     server.register({
@@ -172,7 +172,7 @@ const register = require('../lib/npm-event')
       payload: reqPayload
     })
 
-    t.true((payloadSize > 1024 * 1024 * 25), 'payload is bigger then 25MB')
+    t.true((payloadSize > 1024 * 1024 * 100), 'payload is bigger then 100MB')
     t.is(statusCode, 413, 'statusCode')
     t.end()
   })
