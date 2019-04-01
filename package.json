@@ -12,6 +12,7 @@
     "hoek": "^4.2.1",
     "hot-shots": "^5.2.0",
     "lodash": "^4.17.10",
+    "node-fetch": "^2.3.0",
     "rollbar": "^2.4.0"
   },
   "devDependencies": {
