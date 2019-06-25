@@ -51,7 +51,21 @@ const register = require('../lib/npm-event')
         latest: '1.0.0'
       },
       versions: {
-        '1.0.0': {}
+        '1.0.0': {
+          'repository': {
+            type: 'git',
+            url: 'git+https://github.com/lodash/lodash.git'
+          },
+          'license': 'MIT',
+          '_npmUser': {
+            name: 'jdalton',
+            email: 'john.david.dalton@gmail.com'
+          },
+          'contributors': {},
+          'bugs': {},
+          'keywords': [],
+          'author': {}
+        }
       }
     } })
 
@@ -78,7 +92,6 @@ const register = require('../lib/npm-event')
       },
       payload: reqPayload
     })
-
     t.is(statusCode, 202, 'statusCode')
     t.true(JSON.parse(payload).ok, 'payload')
 
@@ -88,7 +101,19 @@ const register = require('../lib/npm-event')
       dependency: '@test/test',
       installation,
       distTags: { latest: '1.0.0' },
-      versions: { '1.0.0': {} },
+      versions: {
+        '1.0.0': {
+          'repository': {
+            type: 'git',
+            url: 'git+https://github.com/lodash/lodash.git'
+          },
+          'license': 'MIT',
+          '_npmUser': {
+            name: 'jdalton',
+            email: 'john.david.dalton@gmail.com'
+          }
+        }
+      },
       registry: 'https://registry.npmjs.com'
     }, 'job data')
     t.same(job.properties.priority, 1, 'job priority')
