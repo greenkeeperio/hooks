@@ -30,17 +30,17 @@ const register = require('../lib/update-node-event')
   tap.test('rejects without payload', async (t) => {
     server.register({
       register,
-      options: {env}
+      options: { env }
     })
 
-    const {statusCode} = await server.inject({
+    const { statusCode } = await server.inject({
       method: 'POST',
       url: '/update-node',
       headers: {
         'Bearer-Token': env.BEARER_TOKEN,
         'Content-Type': 'application/json'
       },
-      payload: JSON.stringify({id: '12'})
+      payload: JSON.stringify({ id: '12' })
     })
     t.is(statusCode, 400, 'statusCode')
     t.end()
@@ -54,10 +54,10 @@ const register = require('../lib/update-node-event')
     })
     server.register({
       register,
-      options: {env, channel}
+      options: { env, channel }
     })
 
-    const {statusCode} = await server.inject({
+    const { statusCode } = await server.inject({
       method: 'POST',
       url: '/update-node',
       headers: {
@@ -72,7 +72,7 @@ const register = require('../lib/update-node-event')
   tap.test('stores event in queue', async (t) => {
     server.register({
       register,
-      options: {env, channel}
+      options: { env, channel }
     })
 
     const reqPayload = JSON.stringify({
@@ -81,7 +81,7 @@ const register = require('../lib/update-node-event')
       codeName: 'Dubnium'
     })
 
-    const {statusCode, payload} = await server.inject({
+    const { statusCode, payload } = await server.inject({
       method: 'POST',
       url: '/update-node',
       headers: {

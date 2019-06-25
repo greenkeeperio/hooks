@@ -30,30 +30,30 @@ const register = require('../lib/reset-event')
   tap.test('rejects without payload', async (t) => {
     server.register({
       register,
-      options: {env}
+      options: { env }
     })
 
-    const {statusCode} = await server.inject({
+    const { statusCode } = await server.inject({
       method: 'POST',
       url: '/reset',
       headers: {
         'Bearer-Token': env.BEARER_TOKEN,
         'Content-Type': 'application/json'
       },
-      payload: JSON.stringify({id: '12'})
+      payload: JSON.stringify({ id: '12' })
     })
     t.is(statusCode, 400, 'statusCode')
     t.end()
   })
 
   tap.test('rejects without authentification', async (t) => {
-    const payload = JSON.stringify({repositoryFullName: 'finnp/abc'})
+    const payload = JSON.stringify({ repositoryFullName: 'finnp/abc' })
     server.register({
       register,
-      options: {env, channel}
+      options: { env, channel }
     })
 
-    const {statusCode} = await server.inject({
+    const { statusCode } = await server.inject({
       method: 'POST',
       url: '/reset',
       headers: {
@@ -68,12 +68,12 @@ const register = require('../lib/reset-event')
   tap.test('stores event in queue', async (t) => {
     server.register({
       register,
-      options: {env, channel}
+      options: { env, channel }
     })
 
-    const reqPayload = JSON.stringify({repositoryFullName: 'finnp/abc'})
+    const reqPayload = JSON.stringify({ repositoryFullName: 'finnp/abc' })
 
-    const {statusCode, payload} = await server.inject({
+    const { statusCode, payload } = await server.inject({
       method: 'POST',
       url: '/reset',
       headers: {

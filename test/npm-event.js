@@ -32,20 +32,20 @@ const register = require('../lib/npm-event')
   tap.test('rejects without correct signature', (t) => {
     server.register({
       register,
-      options: {env}
+      options: { env }
     })
 
     server.inject({
       method: 'POST',
       url: '/npm/123'
-    }, ({statusCode}) => {
+    }, ({ statusCode }) => {
       t.is(statusCode, 403, 'statusCode')
       t.end()
     })
   })
 
   tap.test('stores handled and signed event in queue', async (t) => {
-    const reqPayload = JSON.stringify({payload: {
+    const reqPayload = JSON.stringify({ payload: {
       name: '@test/test',
       'dist-tags': {
         latest: '1.0.0'
@@ -53,11 +53,11 @@ const register = require('../lib/npm-event')
       versions: {
         '1.0.0': {}
       }
-    }})
+    } })
 
     server.register({
       register,
-      options: {env, channel}
+      options: { env, channel }
     })
 
     const installation = '123'
@@ -69,7 +69,7 @@ const register = require('../lib/npm-event')
       .update(reqPayload)
       .digest('hex')
 
-    const {statusCode, payload} = await server.inject({
+    const { statusCode, payload } = await server.inject({
       method: 'POST',
       url: `/npm/${installation}`,
       headers: {
@@ -108,7 +108,7 @@ const register = require('../lib/npm-event')
 
     server.register({
       register,
-      options: {env, channel}
+      options: { env, channel }
     })
 
     const installation = '123'
@@ -120,7 +120,7 @@ const register = require('../lib/npm-event')
       .update(reqPayload)
       .digest('hex')
 
-    const {statusCode} = await server.inject({
+    const { statusCode } = await server.inject({
       method: 'POST',
       url: `/npm/${installation}`,
       headers: {
@@ -149,7 +149,7 @@ const register = require('../lib/npm-event')
 
     server.register({
       register,
-      options: {env, channel}
+      options: { env, channel }
     })
 
     const installation = '123'
@@ -161,7 +161,7 @@ const register = require('../lib/npm-event')
       .update(reqPayload)
       .digest('hex')
 
-    const {statusCode} = await server.inject({
+    const { statusCode } = await server.inject({
       method: 'POST',
       url: `/npm/${installation}`,
       headers: {

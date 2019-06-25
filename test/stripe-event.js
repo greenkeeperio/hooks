@@ -30,10 +30,10 @@ const register = require('../lib/stripe-event')
   tap.test('rejects without payload', async (t) => {
     server.register({
       register,
-      options: {env}
+      options: { env }
     })
 
-    const {statusCode} = await server.inject({
+    const { statusCode } = await server.inject({
       method: 'POST',
       url: '/stripe'
     })
@@ -44,12 +44,12 @@ const register = require('../lib/stripe-event')
   tap.test('stores event in queue', async (t) => {
     server.register({
       register,
-      options: {env, channel}
+      options: { env, channel }
     })
 
-    const reqPayload = JSON.stringify({id: 'eventid'})
+    const reqPayload = JSON.stringify({ id: 'eventid' })
 
-    const {statusCode, payload} = await server.inject({
+    const { statusCode, payload } = await server.inject({
       method: 'POST',
       url: '/stripe',
       headers: {
