@@ -32,32 +32,46 @@ const register = require('../lib/npm-event')
   tap.test('rejects without correct signature', (t) => {
     server.register({
       register,
-      options: {env}
+      options: { env }
     })
 
     server.inject({
       method: 'POST',
       url: '/npm/123'
-    }, ({statusCode}) => {
+    }, ({ statusCode }) => {
       t.is(statusCode, 403, 'statusCode')
       t.end()
     })
   })
 
   tap.test('stores handled and signed event in queue', async (t) => {
-    const reqPayload = JSON.stringify({payload: {
+    const reqPayload = JSON.stringify({ payload: {
       name: '@test/test',
       'dist-tags': {
         latest: '1.0.0'
       },
       versions: {
-        '1.0.0': {}
+        '1.0.0': {
+          'repository': {
+            type: 'git',
+            url: 'git+https://github.com/lodash/lodash.git'
+          },
+          'license': 'MIT',
+          '_npmUser': {
+            name: 'jdalton',
+            email: 'john.david.dalton@gmail.com'
+          },
+          'contributors': {},
+          'bugs': {},
+          'keywords': [],
+          'author': {}
+        }
       }
-    }})
+    } })
 
     server.register({
       register,
-      options: {env, channel}
+      options: { env, channel }
     })
 
     const installation = '123'
@@ -69,7 +83,7 @@ const register = require('../lib/npm-event')
       .update(reqPayload)
       .digest('hex')
 
-    const {statusCode, payload} = await server.inject({
+    const { statusCode, payload } = await server.inject({
       method: 'POST',
       url: `/npm/${installation}`,
       headers: {
@@ -78,7 +92,6 @@ const register = require('../lib/npm-event')
       },
       payload: reqPayload
     })
-
     t.is(statusCode, 202, 'statusCode')
     t.true(JSON.parse(payload).ok, 'payload')
 
@@ -88,7 +101,19 @@ const register = require('../lib/npm-event')
       dependency: '@test/test',
       installation,
       distTags: { latest: '1.0.0' },
-      versions: { '1.0.0': {} },
+      versions: {
+        '1.0.0': {
+          'repository': {
+            type: 'git',
+            url: 'git+https://github.com/lodash/lodash.git'
+          },
+          'license': 'MIT',
+          '_npmUser': {
+            name: 'jdalton',
+            email: 'john.david.dalton@gmail.com'
+          }
+        }
+      },
       registry: 'https://registry.npmjs.com'
     }, 'job data')
     t.same(job.properties.priority, 1, 'job priority')
@@ -108,7 +133,7 @@ const register = require('../lib/npm-event')
 
     server.register({
       register,
-      options: {env, channel}
+      options: { env, channel }
     })
 
     const installation = '123'
@@ -120,7 +145,7 @@ const register = require('../lib/npm-event')
       .update(reqPayload)
       .digest('hex')
 
-    const {statusCode} = await server.inject({
+    const { statusCode } = await server.inject({
       method: 'POST',
       url: `/npm/${installation}`,
       headers: {
@@ -149,7 +174,7 @@ const register = require('../lib/npm-event')
 
     server.register({
       register,
-      options: {env, channel}
+      options: { env, channel }
     })
 
     const installation = '123'
@@ -161,7 +186,7 @@ const register = require('../lib/npm-event')
       .update(reqPayload)
       .digest('hex')
 
-    const {statusCode} = await server.inject({
+    const { statusCode } = await server.inject({
       method: 'POST',
       url: `/npm/${installation}`,
       headers: {

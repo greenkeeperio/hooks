@@ -32,14 +32,14 @@ const register = require('../lib/github-event')
   tap.test('rejects without correct signature', (t) => {
     server.register({
       register,
-      options: {env}
+      options: { env }
     })
 
     server.inject({
       method: 'POST',
       url: '/github',
-      headers: {'x-github-event': 'push'}
-    }, ({statusCode}) => {
+      headers: { 'x-github-event': 'push' }
+    }, ({ statusCode }) => {
       t.is(statusCode, 403, 'statusCode')
       t.end()
     })
@@ -48,14 +48,14 @@ const register = require('../lib/github-event')
   tap.test('ignores blacklisted event', (t) => {
     server.register({
       register,
-      options: {env}
+      options: { env }
     })
 
     server.inject({
       method: 'POST',
       url: '/github',
-      headers: {'x-github-event': 'delete'}
-    }, ({statusCode}) => {
+      headers: { 'x-github-event': 'delete' }
+    }, ({ statusCode }) => {
       t.is(statusCode, 202, 'statusCode')
       t.end()
     })
@@ -63,18 +63,18 @@ const register = require('../lib/github-event')
 
   tap.test('stores handled and signed event in queue', async (t) => {
     t.plan(4)
-    const reqPayload = JSON.stringify({data: true})
+    const reqPayload = JSON.stringify({ data: true })
 
     server.register({
       register,
-      options: {env, channel}
+      options: { env, channel }
     })
 
     const hmacPayload = crypto.createHmac('sha1', env.WEBHOOKS_SECRET)
       .update(reqPayload)
       .digest('hex')
 
-    const {statusCode, payload} = await server.inject({
+    const { statusCode, payload } = await server.inject({
       method: 'POST',
       url: '/github',
       headers: {
@@ -100,7 +100,7 @@ const register = require('../lib/github-event')
 
   tap.test('get default priority for unknown jobs', async (t) => {
     t.plan(4)
-    const reqPayload = JSON.stringify({data: true})
+    const reqPayload = JSON.stringify({ data: true })
 
     server.register({
       register,
@@ -114,7 +114,7 @@ const register = require('../lib/github-event')
       .update(reqPayload)
       .digest('hex')
 
-    const {statusCode, payload} = await server.inject({
+    const { statusCode, payload } = await server.inject({
       method: 'POST',
       url: '/github',
       headers: {
@@ -140,7 +140,7 @@ const register = require('../lib/github-event')
 
   tap.test('get correct priority for known jobs', async (t) => {
     t.plan(4)
-    const reqPayload = JSON.stringify({action: 'deleted'})
+    const reqPayload = JSON.stringify({ action: 'deleted' })
 
     server.register({
       register,
@@ -154,7 +154,7 @@ const register = require('../lib/github-event')
       .update(reqPayload)
       .digest('hex')
 
-    const {statusCode, payload} = await server.inject({
+    const { statusCode, payload } = await server.inject({
       method: 'POST',
       url: '/github',
       headers: {

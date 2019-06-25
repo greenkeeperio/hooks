@@ -38,13 +38,13 @@ const register = require('../lib/nexus-event')
   tap.test('rejects without correct signature', (t) => {
     server.register({
       register,
-      options: {env}
+      options: { env }
     })
 
     server.inject({
       method: 'POST',
       url: '/nexus/'
-    }, ({statusCode}) => {
+    }, ({ statusCode }) => {
       t.is(statusCode, 403, 'statusCode')
       t.end()
     })
@@ -60,7 +60,7 @@ const register = require('../lib/nexus-event')
 
     server.register({
       register,
-      options: {env, channel}
+      options: { env, channel }
     })
 
     const installation = '1'
@@ -80,7 +80,7 @@ const register = require('../lib/nexus-event')
         }
       })
 
-    const {statusCode, payload} = await server.inject({
+    const { statusCode, payload } = await server.inject({
       method: 'POST',
       url: `/nexus/`,
       headers: {
@@ -120,7 +120,7 @@ const register = require('../lib/nexus-event')
 
     server.register({
       register,
-      options: {env, channel}
+      options: { env, channel }
     })
 
     const hmacPayload = crypto.createHmac('sha1', env.NEXUS_SECRET)
@@ -138,7 +138,7 @@ const register = require('../lib/nexus-event')
         }
       })
 
-    const {statusCode, payload} = await server.inject({
+    const { statusCode, payload } = await server.inject({
       method: 'POST',
       url: `/nexus/`,
       headers: {
@@ -171,7 +171,7 @@ const register = require('../lib/nexus-event')
 
     server.register({
       register,
-      options: {env, channel}
+      options: { env, channel }
     })
 
     const hmacPayload = crypto.createHmac('sha1', env.NEXUS_SECRET)
@@ -189,7 +189,7 @@ const register = require('../lib/nexus-event')
         }
       })
 
-    const {statusCode} = await server.inject({
+    const { statusCode } = await server.inject({
       method: 'POST',
       url: `/nexus/`,
       headers: {
