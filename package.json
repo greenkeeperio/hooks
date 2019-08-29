@@ -13,7 +13,7 @@
     "hot-shots": "^5.2.0",
     "lodash": "^4.17.11",
     "node-fetch": "^2.3.0",
-    "rollbar": "^2.4.0"
+    "rollbar": "^2.12.3"
   },
   "devDependencies": {
     "nock": "^10.0.1",
