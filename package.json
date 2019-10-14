@@ -10,7 +10,7 @@
     "good-squeeze": "^5.0.0",
     "hapi": "^16.6.3",
     "hoek": "^4.2.1",
-    "hot-shots": "^5.2.0",
+    "hot-shots": "^6.8.0",
     "lodash": "^4.17.11",
     "node-fetch": "^2.3.0",
     "rollbar": "^2.4.0"
